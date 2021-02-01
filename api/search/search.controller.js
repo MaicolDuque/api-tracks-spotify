@@ -6,8 +6,8 @@ function handleError(res, statusCode) {
 }
 
 function tracksByText(req, res) {
-  const { q } = req.query
-  return spotifyApi.searchTracks(`track:${q}`).then(
+  const { q, page = 0, limit = 12 } = req.query
+  return spotifyApi.searchTracks(`track:${q}`, { limit, offset: page }).then(
     (data) => res.send(data.body),
     (handleError(res))
   )
